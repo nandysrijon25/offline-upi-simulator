@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline UPI Simulator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+    <div>
+        <h1>Offline UPI</h1>
+        <p>Offline payment & mesh synchronization simulator</p>
+    </div>
+    <span class="badge">Spring Boot</span>
+</header>
+
+<main>
+    <section class="card">
+        <h2>Send Offline Payment</h2>
+        <div class="grid">
+            <label>Sender
+                <select id="sender">
+                    <option value="srijon@upi">Srijon — srijon@upi</option>
+                    <option value="rahul@upi">Rahul — rahul@upi</option>
+                    <option value="demo@upi">Demo User — demo@upi</option>
+                </select>
+            </label>
+            <label>Receiver
+                <select id="receiver">
+                    <option value="rahul@upi">Rahul — rahul@upi</option>
+                    <option value="srijon@upi">Srijon — srijon@upi</option>
+                    <option value="demo@upi">Demo User — demo@upi</option>
+                </select>
+            </label>
+            <label>Amount (₹)
+                <input id="amount" type="number" min="1" step="0.01" value="500">
+            </label>
+            <label>Note
+                <input id="note" type="text" placeholder="Optional note">
+            </label>
+        </div>
+        <button onclick="createPayment()">Queue Offline Payment</button>
+        <div id="message" class="message"></div>
+    </section>
+
+    <section class="stats">
+        <div class="card"><span>Accounts</span><strong id="accountCount">-</strong></div>
+        <div class="card"><span>Payments</span><strong id="paymentCount">-</strong></div>
+        <div class="card"><span>Mesh Packets</span><strong id="packetCount">-</strong></div>
+    </section>
+
+    <section class="card">
+        <div class="section-title">
+            <h2>Accounts</h2>
+            <button class="secondary" onclick="loadAll()">Refresh</button>
+        </div>
+        <div id="accounts"></div>
+    </section>
+
+    <section class="card">
+        <div class="section-title">
+            <h2>Offline Payments</h2>
+            <button class="secondary" onclick="gossip()">Run Gossip Round</button>
+        </div>
+        <div id="payments"></div>
+    </section>
+
+    <section class="card">
+        <div class="section-title">
+            <h2>Mesh Packets</h2>
+            <span class="hint">Each gossip round increases hops and decreases TTL.</span>
+        </div>
+        <div id="packets"></div>
+    </section>
+</main>
+
+<footer>Educational simulation — not a real UPI service.</footer>
+<script src="/app.js"></script>
+</body>
+</html>
